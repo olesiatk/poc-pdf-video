@@ -1,0 +1,62 @@
+:root {
+  --bg: #f7f7f8;
+  --surface: #ffffff;
+  --border: #e3e3e6;
+  --text: #1c1c1f;
+  --text-muted: #6b6b73;
+  --accent: #16a34a;
+  --accent-hover: #128a3e;
+  --accent-bg: rgba(22, 163, 74, 0.08);
+  --danger: #dc2626;
+  --radius: 0;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.04);
+
+  color-scheme: light dark;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17181c;
+    --surface: #1f2024;
+    --border: #303136;
+    --text: #f2f2f3;
+    --text-muted: #9a9aa2;
+    --accent: #22c55e;
+    --accent-hover: #34d566;
+    --accent-bg: rgba(34, 197, 94, 0.12);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+/* Embedded in an iframe (see src/postMessage.ts) — blend into the host page instead of
+   forcing our own page background / full-viewport height. */
+body.is-embedded {
+  background: transparent;
+}
+
+body.is-embedded .app {
+  min-height: 0;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+}
