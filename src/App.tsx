@@ -5,7 +5,6 @@ import { RouteBridge } from './components/RouteBridge';
 import { MainPage } from './pages/MainPage';
 import { LibraryPage } from './pages/LibraryPage';
 import { useIframeResize } from './hooks/useIframeResize';
-import { isEmbedded } from './postMessage';
 import { detectKind } from './utils/file';
 import { generateId } from './utils/id';
 import { sampleFiles } from './sampleFiles';
@@ -21,10 +20,6 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
 
   useIframeResize();
-
-  useEffect(() => {
-    document.body.classList.toggle('is-embedded', isEmbedded());
-  }, []);
 
   useEffect(() => {
     return () => {
