@@ -7,6 +7,7 @@ import { LibraryPage } from './pages/LibraryPage';
 import { useIframeResize } from './hooks/useIframeResize';
 import { isEmbedded } from './postMessage';
 import { detectKind } from './utils/file';
+import { generateId } from './utils/id';
 import { sampleFiles } from './sampleFiles';
 import type { MediaFile } from './types';
 import './App.css';
@@ -35,7 +36,7 @@ export default function App() {
   function handleFilesAdded(newFiles: File[]) {
     setError(null);
     const added: MediaFile[] = newFiles.map((file) => ({
-      id: crypto.randomUUID(),
+      id: generateId(),
       name: file.name,
       size: file.size,
       kind: detectKind(file)!,
