@@ -6,13 +6,14 @@ export function useIframeResize() {
   // browser paints, rather than one frame after — the earlier it fires, the less
   // often the parent iframe visibly starts at the wrong size.
   useLayoutEffect(() => {
+    const root = document.getElementById('root');
+
     const sendHeightToParent = () => {
       // document.documentElement.scrollHeight can get "stuck" at the tallest height
       // the page has ever reached — it doesn't reliably shrink back down even after
       // content is removed. Measuring the React root's own rendered box is accurate
       // and always current; body/documentElement scrollHeight are only fallbacks for
       // the (unlikely) case #root isn't in the DOM yet.
-      const root = document.getElementById('root');
       const height =
         root?.getBoundingClientRect().height ||
         document.body.scrollHeight ||
@@ -35,23 +36,23 @@ export function useIframeResize() {
     };
     window.addEventListener('message', handleParentPing);
 
-    // 3. Track dynamic DOM updates
-    let observer: MutationObserver | null = null;
-    if (typeof MutationObserver !== 'undefined') {
-      observer = new MutationObserver(sendHeightToParent);
-      observer.observe(document.body, {
-        subtree: true,
-        childList: true,
-        characterData: true, // catch text-only content changes (no element added/removed)
-        attributes: false, // Keep false to prevent infinite layout recalculation loops
-      });
+    // 3. Track every layout size change to our content. A MutationObserver only
+    // catches DOM structure changes (nodes added/removed) — it misses a <video>
+    // reflowing once its metadata finishes loading, an image finishing download, or
+    // a web font swapping in. Those aren't DOM mutations, just later layout passes,
+    // which is exactly why the reported height sometimes lagged behind what actually
+    // rendered. ResizeObserver watches the box size itself, so it catches all of it.
+    let resizeObserver: ResizeObserver | null = null;
+    if (root && typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => sendHeightToParent());
+      resizeObserver.observe(root);
     }
 
     return () => {
       window.removeEventListener('load', sendHeightToParent);
       window.removeEventListener('resize', sendHeightToParent);
       window.removeEventListener('message', handleParentPing);
-      observer?.disconnect();
+      resizeObserver?.disconnect();
     };
   }, []);
 }
