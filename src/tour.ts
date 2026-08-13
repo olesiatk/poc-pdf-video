@@ -4,10 +4,11 @@ import { sendTourStatus } from './postMessage';
 export function startTour() {
   const tour = driver({
     animate: true,
-    overlayOpacity: 0.65,
+    overlayColor: '#000',
+    overlayOpacity: 0.7,
     stagePadding: 6,
     stageRadius: 0,
-    popoverClass: 'app-tour-popover',
+    popoverClass: 'leobit-driver-theme',
     prevBtnText: '← Previous',
     nextBtnText: 'Next →',
     doneBtnText: 'Done',

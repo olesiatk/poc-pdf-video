@@ -492,104 +492,81 @@
   border: none;
 }
 
-/* Guided tour (driver.js) */
+/* Guided tour (driver.js) — Leobit theme */
 
-.app-tour-popover.driver-popover {
-  background: #8dc63f;
-  color: #16210b;
+.driver-popover.leobit-driver-theme {
+  background-color: #7fca03;
+  color: #000;
   border-radius: 0;
-  padding: 18px 20px;
-  max-width: 320px;
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35);
 }
 
-.app-tour-popover .driver-popover-title {
-  color: #16210b;
-  font-size: 19px;
-  font-weight: 700;
+.driver-popover.leobit-driver-theme .driver-popover-title {
+  font-size: 20px;
+  border-radius: 0;
 }
 
-.app-tour-popover .driver-popover-description {
-  color: #1e2b12;
-  font-size: 14px;
-  margin-top: 6px;
+.driver-popover.leobit-driver-theme .driver-popover-title,
+.driver-popover.leobit-driver-theme .driver-popover-description,
+.driver-popover.leobit-driver-theme .driver-popover-progress-text {
+  color: #000;
+  border-radius: 0;
 }
 
-.app-tour-popover .driver-popover-close-btn {
-  color: rgba(22, 33, 11, 0.55);
-  top: 12px;
-  right: 12px;
-  font-size: 16px;
-}
-
-.app-tour-popover .driver-popover-close-btn:hover,
-.app-tour-popover .driver-popover-close-btn:focus {
-  color: #16210b;
-}
-
-.app-tour-popover .driver-popover-footer {
-  margin-top: 16px;
-}
-
-.app-tour-popover .driver-popover-progress-text {
-  display: none;
-}
-
-.app-tour-popover .driver-popover-navigation-btns {
-  width: 100%;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.app-tour-popover .driver-popover-navigation-btns button + button {
-  margin-left: 0;
-}
-
-.app-tour-popover .driver-popover-footer-btn {
-  all: unset;
-  box-sizing: border-box;
+.driver-popover.leobit-driver-theme button {
   flex: 1;
   text-align: center;
-  cursor: pointer;
-  padding: 9px 14px;
-  font-size: 13.5px;
-  font-weight: 600;
+  background-color: #000;
+  color: #ffffff;
+  border: 2px solid #000;
+  text-shadow: none;
+  font-size: 14px;
+  padding: 5px 8px;
+  border-radius: 0;
 }
 
-.app-tour-popover .driver-popover-prev-btn {
-  background: #2f4a1f;
-  color: #fff;
+.driver-popover.leobit-driver-theme button:hover {
+  background-color: #000;
+  border-radius: 0;
+  color: #ffffff;
 }
 
-.app-tour-popover .driver-popover-prev-btn:hover {
-  background: #263c19;
+.driver-popover.leobit-driver-theme .driver-popover-navigation-btns {
+  justify-content: space-between;
+  gap: 3px;
+  border-radius: 0;
 }
 
-.app-tour-popover .driver-popover-next-btn,
-.app-tour-popover .driver-popover-done-btn {
-  background: #111214;
-  color: #fff;
+.driver-popover.leobit-driver-theme .driver-popover-close-btn {
+  color: #9b9b9b;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
 }
 
-.app-tour-popover .driver-popover-next-btn:hover,
-.app-tour-popover .driver-popover-done-btn:hover {
-  background: #000;
+.driver-popover.leobit-driver-theme .driver-popover-close-btn:hover {
+  color: white;
+  border-radius: 0;
+  background-color: #36b802;
 }
 
-.app-tour-popover .driver-popover-arrow-side-top {
-  border-bottom-color: #8dc63f;
+.driver-popover.leobit-driver-theme .driver-popover-arrow-side-left.driver-popover-arrow {
+  border-left-color: #7fca03;
+  border-radius: 0;
 }
 
-.app-tour-popover .driver-popover-arrow-side-bottom {
-  border-top-color: #8dc63f;
+.driver-popover.leobit-driver-theme .driver-popover-arrow-side-right.driver-popover-arrow {
+  border-right-color: #7fca03;
+  border-radius: 0;
 }
 
-.app-tour-popover .driver-popover-arrow-side-left {
-  border-right-color: #8dc63f;
+.driver-popover.leobit-driver-theme .driver-popover-arrow-side-top.driver-popover-arrow {
+  border-top-color: #7fca03;
+  border-radius: 0;
 }
 
-.app-tour-popover .driver-popover-arrow-side-right {
-  border-left-color: #8dc63f;
+.driver-popover.leobit-driver-theme .driver-popover-arrow-side-bottom.driver-popover-arrow {
+  border-bottom-color: #7fca03;
+  border-radius: 0;
 }
 
 /* Library page */
