@@ -422,7 +422,7 @@
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -435,7 +435,7 @@
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   width: 100%;
-  max-width: 960px;
+  max-width: 90vw;
   max-height: 90vh;
   display: flex;
   flex-direction: column;
