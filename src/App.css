@@ -56,12 +56,28 @@
   grid-template-columns: minmax(280px, 360px) 1fr;
   gap: 24px;
   align-items: start;
-  padding: 32px 8 48px;
+  padding: 32px 16px 80px;
 }
 
 @media (max-width: 960px) {
   .app__layout {
     grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .app__layout {
+    padding: 0 16px;
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 1081px) {
+  .app__layout {
+    width: 1224px;
+    max-width: 96%;
+    margin: 0 auto;
   }
 }
 
