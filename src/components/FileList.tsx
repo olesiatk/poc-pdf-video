@@ -1,5 +1,5 @@
 import type { MediaFile } from '../types';
-import { formatBytes } from '../utils/file';
+import { formatBytes, mediaKindBadge } from '../utils/file';
 
 interface FileListProps {
   files: MediaFile[];
@@ -24,7 +24,7 @@ export function FileList({ files, selectedId, onSelect, onPreview, onRemove }: F
           onDoubleClick={() => onPreview(file.id)}
         >
           <span className={`file-list__badge file-list__badge--${file.kind}`}>
-            {file.kind === 'pdf' ? 'PDF' : 'VID'}
+            {mediaKindBadge(file.kind)}
           </span>
           <span className="file-list__info">
             <span className="file-list__name" title={file.name}>

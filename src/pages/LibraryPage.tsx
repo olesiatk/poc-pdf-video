@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { MediaFile } from '../types';
-import { formatBytes, formatDate } from '../utils/file';
+import { formatBytes, formatDate, mediaKindBadge, mediaKindLabel } from '../utils/file';
 
 interface LibraryPageProps {
   files: MediaFile[];
@@ -36,14 +36,14 @@ export function LibraryPage({ files, onPreview, onRemove }: LibraryPageProps) {
                 <td>
                   <div className="library-table__name-cell">
                     <span className={`file-list__badge file-list__badge--${file.kind}`}>
-                      {file.kind === 'pdf' ? 'PDF' : 'VID'}
+                      {mediaKindBadge(file.kind)}
                     </span>
                     <span className="library-table__name" title={file.name}>
                       {file.name}
                     </span>
                   </div>
                 </td>
-                <td>{file.kind === 'pdf' ? 'PDF document' : 'Video'}</td>
+                <td>{mediaKindLabel(file.kind)}</td>
                 <td>{formatBytes(file.size)}</td>
                 <td>{formatDate(file.addedAt)}</td>
                 <td className="library-table__actions">

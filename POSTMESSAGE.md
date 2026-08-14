@@ -43,7 +43,9 @@ Sent from [tour.ts](src/tour.ts).
 | ------ | ------- | ------------------------------- |
 | active | boolean | `true` on start, `false` on end |
 
-No host styling required.
+For the host's own dimming to match this app's, when `active: true`: overlay
+color `#000` at `0.7` opacity (i.e. `background: #00000070` /
+`rgba(0, 0, 0, 0.7)`).
 
 ---
 
@@ -63,34 +65,18 @@ Sent from [Modal.tsx](src/components/Modal.tsx).
 | ----- | ------- | -------------------------------- |
 | open  | boolean | `true` on open, `false` on close |
 
-No host styling required — this is the *in-iframe* modal, not the host-side
-one below.
-
----
-
-### `poc-routing`
-
-Fired whenever the app's internal route changes (React Router). Lets the host
-mirror the current path — e.g. to update its own URL bar/breadcrumbs, or for
-analytics.
-
-Sent from [RouteBridge.tsx](src/components/RouteBridge.tsx).
-
-```json
-{ "type": "poc-routing", "path": "/library" }
-```
-
-| field | type   | notes                                 |
-| ----- | ------ | --------------------------------------- |
-| path  | string | `location.pathname + location.search`  |
+This is the *in-iframe* modal, not the host-side one below. Same dimming as
+`poc-tour-status` when `open: true`: overlay color `#000` at `0.7` opacity
+(`background: #00000070` / `rgba(0, 0, 0, 0.7)`).
 
 ---
 
 ### `poc-open-media`
 
-Requests that the **host** open a file (PDF/video) in its own full-screen
+Requests that the **host** open a file (PDF/video/image) in its own full-screen
 modal — outside the iframe's viewport, which can't otherwise escape its own
-box. This is the one message with host-side styling attached (below).
+box. Sizing/styling of that modal lives entirely on the host side and isn't
+tracked here since it may change independently of this contract.
 
 Sent from [postMessage.ts](src/postMessage.ts) (`sendOpenMedia`), triggered
 by the "⧉ Open in host modal" button in
@@ -129,50 +115,23 @@ sent instead, as a real `Blob`, via `postMessage`'s structured clone:
 
 | field       | type              | notes                                          |
 | ----------- | ----------------- | ----------------------------------------------- |
-| mediaType   | `'pdf' \| 'video'` |                                                  |
+| mediaType   | `'pdf' \| 'video' \| 'image'` |                                        |
 | name        | string             | original file name                              |
 | url         | string             | present for statically hosted files             |
 | file        | Blob               | present for user-uploaded files, instead of `url` |
 
-Host handling: if `payload.file` is present, call
-`URL.createObjectURL(payload.file)` to get a URL usable in the host's own
-document; otherwise use `payload.url` directly. Either way, load it in an
-`<iframe>` inside the host's modal (PDFs render via the browser's built-in
-viewer this way; videos and most other file types also work fine in an
-iframe).
+Host handling: set the modal's title text from `payload.name`. If
+`payload.file` is present, call `URL.createObjectURL(payload.file)` to get a
+URL usable in the host's own document and set that as the (single, reused)
+`<iframe>`'s `src`; otherwise set `src` to `payload.url` directly. PDFs render
+via the browser's built-in viewer this way; videos and most other file types
+also work fine in an iframe. Reveal the overlay, set `document.body.style.overflow
+= 'hidden'` while it's open, and attach the `Escape` keydown listener.
 
-**Host styling** (full-screen modal, escaping the app's iframe):
-
-```css
-.poc-host-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  z-index: 1100; /* above the site header (999) and any other overlay */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.poc-host-modal {
-  width: 85vw;
-  height: 85vh;
-  background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.poc-host-modal iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-```
-
-Close on: backdrop click, close (×) button, `Escape`. On close, remove the
-iframe from the DOM (stops any playing video/audio) and, if a `file` Blob was
-used, call `URL.revokeObjectURL()` on the object URL created for it —
-otherwise every open leaks memory.
+Close on: backdrop click, close (×) button, `Escape`. On close: hide the
+overlay, restore `body.style.overflow`, remove the `Escape` listener, and — if
+a `file` Blob was used — call `URL.revokeObjectURL()` on the object URL
+created for it, otherwise every open leaks memory.
 
 ## Inbound — host → app
 

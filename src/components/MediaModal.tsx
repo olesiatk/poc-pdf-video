@@ -1,5 +1,6 @@
 import { Modal } from './Modal';
 import type { MediaFile } from '../types';
+import { mediaKindBadge } from '../utils/file';
 
 interface MediaModalProps {
   file: MediaFile;
@@ -12,7 +13,7 @@ export function MediaModal({ file, onClose }: MediaModalProps) {
       <div className={`media-modal media-modal--${file.kind}`}>
         <div className="media-modal__header">
           <span className={`file-list__badge file-list__badge--${file.kind}`}>
-            {file.kind === 'pdf' ? 'PDF' : 'VID'}
+            {mediaKindBadge(file.kind)}
           </span>
           <span className="media-modal__title" title={file.name}>
             {file.name}
@@ -29,6 +30,8 @@ export function MediaModal({ file, onClose }: MediaModalProps) {
         <div className="media-modal__body">
           {file.kind === 'video' ? (
             <video className="media-modal__video" src={file.url} controls autoPlay />
+          ) : file.kind === 'image' ? (
+            <img className="media-modal__image" src={file.url} alt={file.name} />
           ) : (
             <iframe className="media-modal__pdf" src={file.url} title={file.name} />
           )}

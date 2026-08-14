@@ -32,8 +32,8 @@ export function HowToUse({ onStartTour }: HowToUseProps) {
       </ol>
 
       <p className="app__howto-note">
-        <strong>Restrictions and limitations:</strong> Video and PDF files only. Everything runs
-        locally in your browser — nothing is uploaded anywhere, and files are cleared when you
+        <strong>Restrictions and limitations:</strong> Video, PDF, and image files only. Everything
+        runs locally in your browser — nothing is uploaded anywhere, and files are cleared when you
         refresh the page.
       </p>
     </aside>

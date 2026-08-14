@@ -46,7 +46,7 @@ export function FileUploader({ onFilesAdded, onRejected }: FileUploaderProps) {
       <input
         ref={inputRef}
         type="file"
-        accept="video/*,application/pdf"
+        accept="video/*,application/pdf,image/png,image/jpeg"
         multiple
         hidden
         onChange={(e) => {
@@ -57,7 +57,7 @@ export function FileUploader({ onFilesAdded, onRejected }: FileUploaderProps) {
       <div className="dropzone__icon">+</div>
       <div className="dropzone__title">Add file</div>
       <div className="dropzone__hint">Drag & drop or click to browse</div>
-      <div className="dropzone__types">Video (MP4, MOV, WEBM...) or PDF</div>
+      <div className="dropzone__types">Video (MP4, MOV, WEBM...), PDF, or Image (PNG, JPG)</div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-export type MediaKind = 'video' | 'pdf';
+export type MediaKind = 'video' | 'pdf' | 'image';
 
 export interface MediaFile {
   id: string;

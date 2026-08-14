@@ -1,5 +1,5 @@
 import type { MediaFile } from '../types';
-import { formatBytes, formatDate } from '../utils/file';
+import { formatBytes, formatDate, mediaKindLabel } from '../utils/file';
 import { sendOpenMedia } from '../postMessage';
 
 interface MediaViewerProps {
@@ -39,6 +39,8 @@ export function MediaViewer({ file, onExpand }: MediaViewerProps) {
       <div className="viewer__stage">
         {file.kind === 'video' ? (
           <video key={file.id} className="viewer__video" src={file.url} controls />
+        ) : file.kind === 'image' ? (
+          <img key={file.id} className="viewer__image" src={file.url} alt={file.name} />
         ) : (
           <iframe key={file.id} className="viewer__pdf" src={file.url} title={file.name} />
         )}
@@ -48,7 +50,7 @@ export function MediaViewer({ file, onExpand }: MediaViewerProps) {
         <dl className="viewer__details">
           <div>
             <dt>Type</dt>
-            <dd>{file.kind === 'pdf' ? 'PDF document' : 'Video'}</dd>
+            <dd>{mediaKindLabel(file.kind)}</dd>
           </div>
           <div>
             <dt>Size</dt>

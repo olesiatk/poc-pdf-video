@@ -7,7 +7,18 @@ export function detectKind(file: File): MediaKind | null {
   if (file.type.startsWith('video/')) {
     return 'video';
   }
+  if (['image/png', 'image/jpeg'].includes(file.type) || /\.(png|jpe?g)$/i.test(file.name)) {
+    return 'image';
+  }
   return null;
+}
+
+export function mediaKindBadge(kind: MediaKind): string {
+  return { pdf: 'PDF', video: 'VID', image: 'IMG' }[kind];
+}
+
+export function mediaKindLabel(kind: MediaKind): string {
+  return { pdf: 'PDF document', video: 'Video', image: 'Image' }[kind];
 }
 
 export function formatBytes(bytes: number): string {

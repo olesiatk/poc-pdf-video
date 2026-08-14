@@ -36,7 +36,7 @@ export function sendRouting(path: string) {
   postToParent({ type: POC_MESSAGE.ROUTING, path });
 }
 
-export async function sendOpenMedia(mediaType: 'pdf' | 'video', url: string, name: string) {
+export async function sendOpenMedia(mediaType: 'pdf' | 'video' | 'image', url: string, name: string) {
   if (!isEmbedded()) return;
 
   if (url.startsWith('blob:')) {
