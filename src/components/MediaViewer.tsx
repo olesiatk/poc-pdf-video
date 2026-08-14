@@ -17,12 +17,7 @@ export function MediaViewer({ file, onExpand }: MediaViewerProps) {
 
   return (
     <div className="viewer">
-      <div className="viewer__stage">
-        {file.kind === 'video' ? (
-          <video key={file.id} className="viewer__video" src={file.url} controls />
-        ) : (
-          <iframe key={file.id} className="viewer__pdf" src={file.url} title={file.name} />
-        )}
+      <div className="viewer__toolbar">
         <button
           type="button"
           className="viewer__expand"
@@ -31,6 +26,13 @@ export function MediaViewer({ file, onExpand }: MediaViewerProps) {
         >
           ⤢
         </button>
+      </div>
+      <div className="viewer__stage">
+        {file.kind === 'video' ? (
+          <video key={file.id} className="viewer__video" src={file.url} controls />
+        ) : (
+          <iframe key={file.id} className="viewer__pdf" src={file.url} title={file.name} />
+        )}
       </div>
       <div className="viewer__meta">
         <h2 className="viewer__title">{file.name}</h2>
