@@ -26,6 +26,16 @@ const licensedPdfSample: MediaFile = {
   addedAt: Date.now(),
 };
 
+const imagePdfSample: MediaFile = {
+  id: 'sample-image-pdf',
+  name: 'Image.pdf',
+  size: 926991,
+  kind: 'pdf',
+  mimeType: 'application/pdf',
+  url: `${base}samples/Image.pdf`,
+  addedAt: Date.now(),
+};
+
 export const sampleFiles: MediaFile[] = includeLicensedSamples
-  ? [licensedPdfSample, videoSample]
-  : [videoSample];
+  ? [licensedPdfSample, imagePdfSample, videoSample]
+  : [imagePdfSample, videoSample];
