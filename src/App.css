@@ -351,6 +351,7 @@
 .viewer__toolbar {
   display: flex;
   justify-content: flex-end;
+  gap: 6px;
   padding: 8px 10px;
   background: #0b0b0d;
 }

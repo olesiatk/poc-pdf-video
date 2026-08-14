@@ -1,5 +1,6 @@
 import type { MediaFile } from '../types';
 import { formatBytes, formatDate } from '../utils/file';
+import { sendOpenMedia } from '../postMessage';
 
 interface MediaViewerProps {
   file: MediaFile | null;
@@ -25,6 +26,14 @@ export function MediaViewer({ file, onExpand }: MediaViewerProps) {
           aria-label="Open in modal"
         >
           ⤢
+        </button>
+        <button
+          type="button"
+          className="viewer__expand"
+          onClick={() => sendOpenMedia(file.kind, file.url, file.name)}
+          aria-label="Open in host modal"
+        >
+          ⧉
         </button>
       </div>
       <div className="viewer__stage">

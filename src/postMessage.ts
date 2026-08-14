@@ -3,6 +3,7 @@ export const POC_MESSAGE = {
   TOUR_STATUS: 'poc-tour-status',
   MODAL: 'poc-modal',
   ROUTING: 'poc-routing',
+  OPEN_MEDIA: 'poc-open-media',
 } as const;
 
 export function isEmbedded(): boolean {
@@ -33,4 +34,11 @@ export function sendModalStatus(open: boolean) {
 
 export function sendRouting(path: string) {
   postToParent({ type: POC_MESSAGE.ROUTING, path });
+}
+
+export function sendOpenMedia(mediaType: 'pdf' | 'video', url: string, name: string) {
+  // Resolve against this app's origin so the host's overlay iframe (a different
+  // document/origin) doesn't try to load a path relative to its own page.
+  const absoluteUrl = new URL(url, window.location.href).href;
+  postToParent({ type: POC_MESSAGE.OPEN_MEDIA, payload: { mediaType, url: absoluteUrl, name } });
 }
